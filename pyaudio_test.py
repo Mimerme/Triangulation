@@ -11,15 +11,22 @@ duration = 15.0   # in seconds, may be float
 f = 50        # sine frequency, Hz, may be float
 
 #Hidden audio is within the audible frequency range
-hidden = np.cos((2*np.pi*np.arange(fs*duration)*17000)/fs).astype(np.float32)
-carrier = np.cos((2*np.pi*np.arange(fs*duration)*25000)/fs).astype(np.float32)
+hidden = np.cos((2*np.pi*np.arange(fs*duration)*50)/fs).astype(np.float32)
+carrier = np.cos((2*np.pi*np.arange(fs*duration)*10)/fs).astype(np.float32)
 
-plt.plot(hidden)
+x = (2*np.pi*np.arange(fs*duration)*50)/fs
+plt.plot(x[:10000], hidden[:10000])
+plt.show()
+
+plt.plot(x[:10000], carrier[:10000])
 plt.show()
 
 sin = ((hidden * carrier) + carrier).astype(np.float32)
 # generate samples, note conversion to float32 array
 samples = sin + (sin * sin)
+
+plt.plot(x[:10000], samples[:10000])
+plt.show()
 #samples = (np.sin(2*np.pi*np.arange(fs*duration)*f/fs)).astype(np.float32)
 
 
